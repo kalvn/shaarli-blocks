@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>{include="includes"}</head>
+<body
+{if condition="$link.title==''"}onload="document.linkform.lf_title.focus();"
+{elseif condition="$link.description==''"}onload="document.linkform.lf_description.focus();"
+{else}onload="document.linkform.lf_tags.focus();"{/if} >
+<div id="pageheader">
+	{include="page.header"}
+	<div id="editlinkform">
+	    <form method="post" name="linkform" role="form">
+	        <input type="hidden" name="lf_linkdate" value="{$link.linkdate}">
+	        <div class="form-group">
+		        <label for="lf_url" class="col-xs-2 control-label">URL</label>
+		        <div class="col-xs-10">
+			        <input type="text" name="lf_url" id="lf_url" value="{$link.url|htmlspecialchars}"/>
+			    </div>
+		    </div>
+		    <div class="form-group clearfix">
+	        	<label for="lf_title" class="col-xs-2 control-label">Title</label>
+	        	<div class="col-xs-10">
+		        	<input type="text" name="lf_title" id="lf_title" value="{$link.title|htmlspecialchars}" style="width:100%">
+		        </div>
+	        </div>
+	        <div class="form-group">
+	        	<label for="lf_description">Description</label><br/>
+	        	<textarea name="lf_description" id="lf_description" rows="4" cols="25" style="width:100%">{$link.description|htmlspecialchars}</textarea>
+	        </div>
+	        <div class="form-group">
+	        	<label for="lf_tags">Tags</label><br/>
+	        	<input type="text" id="lf_tags" name="lf_tags" value="{$link.tags|htmlspecialchars}" style="width:100%">
+	        </div>
+	        <div class="form-group">
+		        {if condition="($link_is_new && $GLOBALS['privateLinkByDefault']==true) || $link.private == true"}
+	            <input type="checkbox" checked="checked" name="lf_private" id="lf_private">
+	            &nbsp;<label for="lf_private"><i>Private</i></label><br>
+	            {else}
+	            <input type="checkbox"  name="lf_private" id="lf_private">
+	            &nbsp;<label for="lf_private"><i>Private</i></label><br>
+	            {/if}
+            </div>
+            <div class="form-group">
+		        <input type="submit" value="Save" name="save_edit" class="bigbutton">
+		        <input type="submit" value="Cancel" name="cancel_edit" class="bigbutton">
+		        {if condition="!$link_is_new"}<input type="submit" value="Delete" name="delete_link" class="bigbutton" onClick="return confirmDeleteLink();" style="float:right;">{/if}
+		        <input type="hidden" name="token" value="{$token}">
+		        {if condition="$http_referer"}<input type="hidden" name="returnurl" value="{$http_referer|htmlspecialchars}">{/if}
+	    	</div>
+	    </form>
+	</div>
+</div>
+{include="page.footer"}
+</body>
+</html>

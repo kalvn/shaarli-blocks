@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>{include="includes"}</head>
+<body onload="document.addform.post.focus();">
+<div id="pageheader">
+	{include="page.header"}
+	<div id="headerform">
+		<form method="GET" action="" name="addform" class="addform">
+			<div class="form-group">
+				<input type="text" name="post" style="width: 100%;" placeholder="Paste or type a URL"> 
+			</div>
+			<input type="submit" value="Add link" class="bigbutton">
+		</form>
+	</div>
+</div>
+{include="page.footer"}
+</body>
+</html>

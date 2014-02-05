@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>{include="includes"}</head>
+<body onload="document.changetag.fromtag.focus();">
+<div id="pageheader">
+	{include="page.header"}
+	<form method="POST" action="" name="changetag" id="changetag">
+		<div class="form-group">
+			<input type="hidden" name="token" value="{$token}">
+			<input type="text" name="fromtag" id="fromtag" placeholder="Old tag (case sensitive)">
+			<label for="totag">&#x21D2;</label>
+			<input type="text" name="totag" id="totag" placeholder="New tag">
+		</div>
+		<div class="form-group">
+			<input type="submit" name="renametag" value="Rename tag" class="bigbutton">
+			<input type="submit" name="deletetag" value="Delete tag" class="bigbutton" onClick="return confirmDeleteTag();">
+		</div>
+	</form>
+<script language="JavaScript">function confirmDeleteTag() { var agree=confirm("Are you sure you want to delete this tag from all links ?"); if (agree) return true ; else return false ; }</script>
+</div>
+{include="page.footer"}
+</body>
+</html>

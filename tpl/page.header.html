@@ -1,0 +1,36 @@
+<div class="row" id="header-high">
+		<div class="col-md-12">
+    <div id="logo" title="Share your links !" onclick="document.location='?';"></div>
+    <span id="shaarli_title"><a href="?">{$shaarlititle|htmlspecialchars}</a></span>
+  
+{if="!empty($_GET['source']) && $_GET['source']=='bookmarklet'"}
+    {ignore} When called as a popup from bookmarklet, do not display menu. {/ignore}
+{else}
+    <a href="?" class="btn btn-custom nomobile">Home</a>
+    {if="isLoggedIn()"}
+        <a href="?do=logout" class="btn btn-custom">Logout</a><a href="?do=tools" class="btn btn-custom">Tools</a><a href="?do=addlink" class="btn btn-custom"><b>Add link</b></a>
+    {elseif="$GLOBALS['config']['OPEN_SHAARLI']"}
+        <a href="?do=tools" class="btn btn-custom">Tools</a><a href="?do=addlink" class="btn btn-custom"><b>Add link</b></a>
+    {else}
+        <a href="?do=login" class="btn btn-custom">Login</a>
+    {/if}
+    <a href="{$feedurl}?do=rss{$searchcrits}" class="btn btn-custom nomobile">RSS Feed</a>
+    <a href="{$feedurl}?do=atom{$searchcrits}" style="padding-left:10px;" class="btn btn-custom nomobile">ATOM Feed</a>
+    <a href="?do=tagcloud" class="btn btn-custom">Tag cloud</a>
+    <a href="?do=picwall{$searchcrits}" class="btn btn-custom">Picture wall</a>
+    <a href="?do=daily" class="btn btn-custom">Daily</a>
+	{if="isLoggedIn()"}
+	<a href="?privateonly" class="btn btn-custom">
+		{if="$privateonly"}
+		<img src="images/private_16x16_active.png#" width="16" height="16" title="Click to see all links" alt="Click to see all links">
+		{else}
+		<img src="images/private_16x16.png#" width="16" height="16" title="Click to see only private links" alt="Click to see only private links">
+		{/if}
+	</a>
+	{/if}
+{/if}
+    <div class="clear"></div>
+
+
+</div>
+	</div>

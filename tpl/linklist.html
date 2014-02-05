@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>{include="includes"}</head>
+<body>
+<div id="pageheader">
+
+			{include="page.header"}
+		
+	<div id="headerform" class="row">
+	    <form method="GET" class="searchform col-md-4 col-sm-6" name="searchform">
+			<div class="row">
+			<div class="col-xs-8">
+				<input type="text" id="searchform_value" name="searchterm" value="">
+			</div>
+			<div class="col-xs-4">
+				<input type="submit" value="Search" class="bigbutton">
+			</div>
+			</div>
+		</form>
+	    <form method="GET" class="tagfilter col-md-4 col-sm-6" name="tagfilter">
+			<div class="row">
+			<div class="col-xs-8">
+				<input type="text" name="searchtags" id="tagfilter_value" value="">
+			</div>
+			<div class="col-xs-4">
+				<input type="submit" value="Filter by tag" class="bigbutton">
+			</div>
+			</div>
+		</form>
+		<div id="paging_linksperpage" class="col-md-4 col-sm-12 text-center">
+			Links per page: <a href="?linksperpage=20">20</a> <a href="?linksperpage=50">50</a> <a href="?linksperpage=100">100</a>
+			<form method="GET" class="linksperpage"><input type="text" name="linksperpage" size="2"></form>
+		</div>
+	</div>
+</div>
+
+<div id="linklist">
+
+    {include="linklist.paging"}
+
+    {if="count($links)==0"}
+        <div id="searchcriteria">Nothing found.</i></div>
+    {else}
+        {if="$search_type=='fulltext'"}
+            <div id="searchcriteria">{$result_count} results for <i>{$search_crits}</i></div>
+        {/if}
+        {if="$search_type=='tags'"}
+            <div id="searchcriteria">{$result_count} results for tags <i>
+            {loop="search_crits"}
+                <span class="linktag" title="Remove tag"><a href="?removetag={$value|htmlspecialchars}">{$value|htmlspecialchars} <span style="border-left:1px solid #aaa; padding-left:5px; color:#6767A7;">x</span></a></span>
+            {/loop}</i></div>
+        {/if}
+    {/if}
+    <div id="linklist-middle">
+	<div class="row">
+		{$index=0}
+        {loop="links"}
+			{if="$index % 3 == 0 && $index > 0"}
+				</div><div class="row">
+			{/if}
+			{if="count($links) == 1"}
+			<div class="col-md-12">
+			{else}
+			<div class="col-md-4">
+			{/if}
+				<div class="card {if="$value.class"} {$value.class}{/if}">
+					<a name="{$value.linkdate|smallHash}" id="{$value.linkdate|smallHash}"></a>
+					<div class="thumbnail">{$value.url|thumbnail}</div>
+					<div class="linkcontainer">
+						<span class="linktitle"><a href="{$redirector}{$value.url|htmlspecialchars}">{$value.title|htmlspecialchars}</a></span>
+						<br>
+						{if="$value.description"}<div class="linkdescription"{if condition="$search_type=='permalink'"} style="max-height:none !important;"{/if}>{$value.description}</div>{/if}
+						{if="!$GLOBALS['config']['HIDE_TIMESTAMPS'] || isLoggedIn()"}
+							<span class="linkdate" title="Permalink"><a href="?{$value.linkdate|smallHash}">{$value.localdate|htmlspecialchars} - permalink</a> - </span>
+						{else}
+							<span class="linkdate" title="Short link here"><a href="?{$value.linkdate|smallHash}">permalink</a> - </span>
+						{/if}
+						<div style="position:relative;display:inline;"><a href="http://invx.com/code/qrcode/?code={$scripturl|urlencode}%3F{$value.linkdate|smallHash}&width=200&height=200" 
+							{if="empty($GLOBALS['disablejquery'])"}onclick="return false;"{/if} class="qrcode"><img src="images/qrcode.png#" width="13" height="13" title="QR-Code"></a></div> - 
+						<span class="linkurl" title="Short link">{$value.url|htmlspecialchars}</span><br>
+						{if="$value.tags"}
+							<div class="linktaglist">
+							{loop="value.taglist"}<span class="linktag" title="Add tag"><a href="?addtag={$value|urlencode}">{$value|htmlspecialchars}</a></span> {/loop}
+							</div>
+						{/if}
+						{if="isLoggedIn()"}
+							<div class="linkeditbuttons">
+								<form method="GET" class="buttoneditform">
+									<input type="hidden" name="edit_link" value="{$value.linkdate}"><input type="image" alt="Edit" src="images/edit_icon.png#" title="Edit" class="button_edit">
+								</form>
+								<form method="POST" class="buttoneditform">
+									<input type="hidden" name="lf_linkdate" value="{$value.linkdate}">
+									<input type="hidden" name="token" value="{$token}">
+									<input type="hidden" name="delete_link">
+									<input type="image" alt="Delete" src="images/delete_icon.png#" title="Delete" class="button_delete" onClick="return confirmDeleteLink();">
+								</form>
+							</div>
+						{/if}
+					</div>
+				</div>
+			</div>
+			{$index=$index+1}
+		{/loop}
+	</div>
+    </div>
+
+    {include="linklist.paging"}
+
+</div>
+
+    {include="page.footer"}
+{if="empty($GLOBALS['disablejquery'])"}    
+<script>
+$(document).ready(function() {
+	$('a.qrcode').click(function(){
+	  hide_qrcode();
+	  var link = $(this).attr('href');
+	  $(this).after('<div class="qrcode" onclick="hide_qrcode();return false;"><img src="'+link+'#" width="200" height="200"><br>click to close</div>');
+	});
+});
+function hide_qrcode() { $('div.qrcode').remove(); }
+</script>
+{/if}
+</body>
+</html>
