@@ -120,6 +120,10 @@ textarea{
 .card.private{
 	background: #e2e2e2 url('../images/lock.png') top right no-repeat;
 }
+.linkcontainer{
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .linktitle a {
 	font-size: 130%;
 	color: #666;
