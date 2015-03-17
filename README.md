@@ -8,7 +8,10 @@ Shaarli Blocks is a theme for [Shaarli](https://github.com/shaarli/Shaarli), the
 
 ## Installation
 
-### Shaarli 0.43b and above
+### Shaarli 0.0.44b and above
+
+
+### Shaarli 0.0.43b
 You need to replace the line **31** of `index.php`
 
     $GLOBALS['config']['RAINTPL_TPL'] = 'tpl/'
@@ -19,15 +22,15 @@ by
 
 Then, copy the *blocks* folder in the *tpl* directory of your Shaarli install.
 
-### Shaarli 0.42b and below
-First, go to the [master branch](https://github.com/kalvn/shaarli-blocks/tree/master) and download it. Then paste the content in your Shaarli main folder. Override existing files when asked to.
+### Shaarli 0.0.42b and below
+Upgrade to a more recent version of Shaarli and follow the steps above :)
 
 ## Demo
-A read-only demo is available on my personal Shaarli : [http://exystenz.com/links](http://exystenz.com/links)
+A read-only demo is [available here](http://exystenz.com/demo/shaarliblocks/).
 
 ------------------------------------------------------------------------------
 
-Shaarli Blocks was tested and validated on Shaarli 0.0.41 beta.
+Shaarli Blocks was tested and validated on Shaarli 0.0.45 beta.
 
 You can download Shaarli on the project page:
 [http://sebsauvage.net/wiki/doku.php?id=php:shaarli](http://sebsauvage.net/wiki/doku.php?id=php:shaarli)
