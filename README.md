@@ -7,7 +7,7 @@ Shaarli Blocks is a theme for [Shaarli](https://github.com/shaarli/Shaarli), the
 
 ## Installation
 
-### Shaarli 0.0.44b and above
+### Shaarli 0.0.43b and above
 Download the `blocks` folder into the `tpl` directory of your Shaarli installation. It should be next to existing `.html` files.
 
 In your Shaarli installation, open the `options.php` file which is inside the `data` folder. If it doesn't exist, create it.
@@ -15,20 +15,11 @@ If you created it, ensure the content of the file starts with `<?php`.
 
 At the bottom of the file, add the following lines:
 
-    $GLOBALS['config']['RAINTPL_TPL'] = 'tpl/blocks/' ; // keep the trailing slash!
+```php
+$GLOBALS['config']['RAINTPL_TPL'] = 'tpl/blocks/' ; // keep the trailing slash!
+```
 
 Access your Shaarli and enjoy your new Blocks theme.
-
-### Shaarli 0.0.43b
-You need to replace the line **31** of `index.php`
-
-    $GLOBALS['config']['RAINTPL_TPL'] = 'tpl/'
-
-by
-
-    $GLOBALS['config']['RAINTPL_TPL'] = 'tpl/blocks/'
-
-Then, copy the *blocks* folder in the *tpl* directory of your Shaarli install.
 
 ### Shaarli 0.0.42b and below
 Upgrade to a more recent version of Shaarli and follow the steps above :)
