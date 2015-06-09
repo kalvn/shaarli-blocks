@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>{include="includes"}</head>
+<head>
+	<link type="text/css" rel="stylesheet" href="lib/awesomplete/awesomplete.css" />
+    <script src="tpl/blocks/lib/awesomplete/awesomplete.min.js#"></script>
+    {include="includes"}
+</head>
 <body
 {if condition="$link.title==''"}onload="document.linkform.lf_title.focus();"
 {elseif condition="$link.description==''"}onload="document.linkform.lf_description.focus();"
@@ -26,9 +30,10 @@
 	        	<label for="lf_description">Description</label><br/>
 	        	<textarea name="lf_description" id="lf_description" rows="4" cols="25" style="width:100%">{$link.description|htmlspecialchars}</textarea>
 	        </div>
-	        <div class="form-group">
+	        <div class="form-group" style="overflow:visible;">
 	        	<label for="lf_tags">Tags</label><br/>
-	        	<input type="text" id="lf_tags" name="lf_tags" value="{$link.tags|htmlspecialchars}" style="width:100%">
+	        	<input type="text" id="lf_tags" name="lf_tags" value="{$link.tags|htmlspecialchars}" style="width:100%"
+	        		data-list="{loop="$tags"}{$key}, {/loop}" data-multiple autocomplete="off">
 	        </div>
 	        <div class="form-group">
 		        {if condition="($link_is_new && $GLOBALS['privateLinkByDefault']==true) || $link.private == true"}
@@ -50,5 +55,21 @@
 	</div>
 </div>
 {include="page.footer"}
+{if="($GLOBALS['config']['OPEN_SHAARLI'] || isLoggedIn())"}
+<script>
+(function($){
+    new Awesomplete($('input[data-multiple]'), {
+        filter: function(text, input) {
+            return Awesomplete.FILTER_CONTAINS(text, input.match(/[^ ]*$/)[0]);
+        },
+        replace: function(text) {
+            var before = this.input.value.match(/^.+ \s*|/)[0];
+            this.input.value = before + text + " ";
+        },
+        minChars: 1
+    });
+})(Awesomplete.$);
+</script>
+{/if}
 </body>
 </html>

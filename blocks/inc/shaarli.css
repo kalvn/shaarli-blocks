@@ -44,6 +44,27 @@ textarea{
 	background-color: #ddd;
 }
 
+/* Image zoom */
+.overlay{
+    display: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 500
+}
+#image-popup{
+    display: none;
+    z-index: 600;
+    position: fixed;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
 
 
 /* Header */

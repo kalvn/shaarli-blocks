@@ -12,12 +12,5 @@
 {/if}
 
 {if="($GLOBALS['config']['OPEN_SHAARLI'] || isLoggedIn()) && empty($GLOBALS['disablejquery'])"}
-<script language="JavaScript">
-$(document).ready(function()
-{
-    $('#lf_tags').autocomplete({source:'{$source}?ws=tags',minLength:1});
-    $('#searchtags').autocomplete({source:'{$source}?ws=tags',minLength:1});
-    $('#fromtag').autocomplete({source:'{$source}?ws=singletag',minLength:1});
-});
-</script>
+<script src="tpl/blocks/inc/shaarli_blocks.js#"></script>
 {/if}
