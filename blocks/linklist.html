@@ -71,7 +71,7 @@
 						<br>
 						{if="$value.description"}<div class="linkdescription"{if condition="$search_type=='permalink'"} style="max-height:none !important;"{/if}>{$value.description}</div>{/if}
 						{if="!$GLOBALS['config']['HIDE_TIMESTAMPS'] || isLoggedIn()"}
-							<span class="linkdate" title="Permalink"><a href="?{$value.linkdate|smallHash}">{$value.localdate|htmlspecialchars} - permalink</a> - </span>
+							<span class="linkdate" title="Permalink"><a href="?{$value.linkdate|smallHash}">{$value.linkdate|htmlspecialchars} - permalink</a> - </span>
 						{else}
 							<span class="linkdate" title="Short link here"><a href="?{$value.linkdate|smallHash}">permalink</a> - </span>
 						{/if}
