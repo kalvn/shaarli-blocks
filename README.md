@@ -1,3 +1,11 @@
+# Attention: This theme will no longer be updated
+... mainly due to lack of time.
+
+Please consider moving to another one to keep receiving updates.
+And feel free to fork it and make it alive again.
+
+----
+
 # Shaarli Blocks
 
 Shaarli Blocks is a theme for [Shaarli](https://github.com/shaarli/Shaarli), the famous personal, minimalist, super-fast, no-database delicious clone.
